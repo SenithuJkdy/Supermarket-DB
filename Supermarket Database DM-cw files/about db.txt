@@ -1,0 +1,64 @@
+Category (CategoryID, Type) 
+
+Brand (BrandID, Name, CategoryID, Origin) 
+
+
+Branch (BranchID, Name, District, Profit) 
+
+
+Employee (EmployeeID, Name, Position, Salary, Address, BranchID) 
+
+
+Customer (CustomerID, Name, Address, PhoneNumber, Email) 
+
+
+Payment (PaymentID, Method, PaymentDateTime, Amount) 
+
+
+Order (OrderID, CustomerID, EmployeeID, BranchID, OrderDate, TotalAmount, Discount, PaymentID) 
+
+
+Item (ItemID, Name, Description, Price, StockQuantity, BrandID, CategoryID) 
+
+
+Order_Item (OrderItemID, OrderID, ItemID, Quantity, UnitPrice, TotalPrice) 
+
+
+Sales (SalesID, BranchID, SaleDate, TotalSalesAmount) 
+
+
+Supply (SupplyID, SupplierID, ItemID, Quantity, SupplyDate) 
+
+Supplier (
+    SupplierID ,
+    Name ,
+    ContactInfo,
+    Origin 
+)
+
+
+CRUD operations
+-Procedure to Add a New Customer
+-Function to Retrieve Customer Details
+-Procedure to Update Customer Address
+-Procedure to Delete a Customer
+
+Roles
+-admin - all
+-user(data-entry) - only manage data = SELECT, INSERT, UPDATE, DELETE
+-viewer - only view data = SELECT
+-(optional - enable auditing for roles/ view audit logs)
+
+Backup procedures
+
+Recovery procedures
+
+GENERATING REPORTS
+-Sales Report by Branch
+-Low Inventory Alert 
+-Customer Purchase History   
+-Daily Sales Summary by Branch
+-Employee Performance Report
+-Monthly ProfitReport
+
+

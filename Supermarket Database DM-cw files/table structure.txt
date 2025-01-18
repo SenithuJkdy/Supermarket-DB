@@ -1,0 +1,105 @@
+Customer
+    CustomerID INT PRIMARY KEY
+    Name VARCHAR2(100) NOT NULL
+    Address VARCHAR2(255)
+    PhoneNumber VARCHAR2(15)
+    Email VARCHAR2(100)
+
+Branch 
+    BranchID INT PRIMARY KEY
+    Name VARCHAR2(100) NOT NULL
+    District VARCHAR2(100)
+    Profit NUMBER(12, 2)
+
+Employee 
+    EmployeeID INT PRIMARY KEY
+    Name VARCHAR2(100) NOT NULL
+    Position VARCHAR2(50)
+    Salary NUMBER(10, 2)
+    Address VARCHAR2(255)
+    BranchID INT
+    FOREIGN KEY (BranchID) REFERENCES Branch(BranchID)
+
+
+Category (
+    CategoryID INT PRIMARY KEY
+    Type VARCHAR2(100) NOT NULL
+
+
+Brand
+    BrandID INT PRIMARY KEY
+    Name VARCHAR2(100) NOT NULL
+    CategoryID INT
+    Origin VARCHAR2(100)
+    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
+
+
+Item 
+    ItemID INT PRIMARY KEY
+    Name VARCHAR2(100) NOT NULL
+    Description CLOB
+    Price NUMBER(10, 2) NOT NULL
+    StockQuantity INT NOT NULL
+    BrandID INT
+    CategoryID INT
+    FOREIGN KEY (BrandID) REFERENCES Brand(BrandID)
+    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
+
+
+Supplier (
+    SupplierID ,
+    Name ,
+    ContactInfo,
+    Origin 
+)
+
+Supply 
+    SupplyID INT PRIMARY KEY
+    SupplierID INT
+    ItemID INT
+    Quantity INT NOT NULL
+    SupplyDate DATE
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+    FOREIGN KEY (ItemID) REFERENCES Item(ItemID)
+
+
+Payment 
+    PaymentID INT PRIMARY KEY
+    Method VARCHAR2(50)
+    PaymentDateTime TIMESTAMP
+    Amount NUMBER(10, 2) NOT NULL
+
+
+Order 
+    OrderID INT PRIMARY KEY
+    CustomerID INT
+    EmployeeID INT
+    BranchID INT
+    OrderDate DATE NOT NULL
+    TotalAmount NUMBER(12, 2)
+    Discount NUMBER(5, 2)
+    PaymentID INT
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+    FOREIGN KEY (BranchID) REFERENCES Branch(BranchID)
+    FOREIGN KEY (PaymentID) REFERENCES Payment(PaymentID)
+
+
+Order_Item 
+    OrderItemID INT PRIMARY KEY
+    OrderID INT
+    ItemID INT
+    Quantity INT NOT NULL
+    UnitPrice NUMBER(10, 2) NOT NULL
+    TotalPrice NUMBER(12, 2)
+    FOREIGN KEY (OrderID) REFERENCES "Order"(OrderID)
+    FOREIGN KEY (ItemID) REFERENCES Item(ItemID)
+
+
+Sales 
+    SalesID INT PRIMARY KEY
+    BranchID INT
+    SaleDate DATE NOT NULL
+    TotalSalesAmount NUMBER(12, 2)
+    FOREIGN KEY (BranchID) REFERENCES Branch(BranchID)
+
